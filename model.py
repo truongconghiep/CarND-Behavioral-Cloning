@@ -68,70 +68,94 @@ def read_Img(file_names):
         images.append(cv2.imread(name))
     return images
 
-def correct_path(names):
+def correct_path(names, to_be_replaced, to_replace ):
     corrected_names = []
     for name in names:
-        corrected_names.append(name.replace(r"C:\Users\H", "C:\\Users\H"))
+        corrected_names.append(name.replace(to_be_replaced, to_replace))
+    return corrected_names
+
+def correct_path_in_data(names):
+    corrected_names = []
+    for name in names:
+        corrected_names.append(name.replace("IMG/", "./Data"))
     return corrected_names
 
 def flip_image_data(images):
     flipped_images = []
     for image in images:
-        flipped_images.append(cv2.flip(image, 0))
+        flipped_images.append(cv2.flip(image, 1))
     return flipped_images
 
 def flip_measurements(measurments):
     flipped_measurements = []
     for measurement in measurments:
-        flipped_measurements.append(-measurement)
+        flipped_measurements.append(measurement * -1.0)
     return flipped_measurements
 
 
-File_name = './output/driving_log.csv'
+# File_name = './output/driving_log.csv'
+# 
+# center_image_names =  Read_Csv(File_name, 0, ',')
+# center_image_names = correct_path(center_image_names)
+# left_image_names = Read_Csv(File_name, 1, ',')
+# left_image_names = correct_path(left_image_names)
+# rigt_image_names = Read_Csv(File_name, 2, ',')
+# rigt_image_names = correct_path(rigt_image_names)
+# measurements = Read_Csv(File_name, 3, ',', dataType = 'float')
+# 
+# center_images = read_Img(center_image_names)
+# left_images = read_Img(left_image_names)
+# right_images = read_Img(rigt_image_names)
+# 
+# flipped_center_images = flip_image_data(center_images)
+# flipped_measurements = flip_measurements(measurements)
 
-center_image_names =  Read_Csv(File_name, 0, ',')
-center_image_names = correct_path(center_image_names)
-left_image_names = Read_Csv(File_name, 1, ',')
-left_image_names = correct_path(left_image_names)
-rigt_image_names = Read_Csv(File_name, 2, ',')
-rigt_image_names = correct_path(rigt_image_names)
-measurements = Read_Csv(File_name, 3, ',', dataType = 'float')
+# File_name_reversed_laps = './2_Laps_reverse/driving_log.csv'
+#  
+# center_image_names_reversed_laps =  Read_Csv(File_name_reversed_laps, 0, ',')
+# center_image_names_reversed_laps = correct_path(center_image_names_reversed_laps,r"C:\Users\H", "C:\\Users\H"
+# left_image_names_reversed_laps = Read_Csv(File_name_reversed_laps, 1, ',')
+# left_image_names_reversed_laps = correct_path(left_image_names_reversed_laps,r"C:\Users\H", "C:\\Users\H")
+# rigt_image_names_reversed_laps = Read_Csv(File_name_reversed_laps, 2, ',')
+# rigt_image_names_reversed_laps = correct_path(rigt_image_names_reversed_laps, r"C:\Users\H", "C:\\Users\H")
+# measurements_reversed_laps = Read_Csv(File_name_reversed_laps, 3, ',', dataType = 'float')
+#  
+#  
+# center_images_reversed_laps = read_Img(center_image_names_reversed_laps)
+# left_images_reversed_laps = read_Img(left_image_names_reversed_laps)
+# right_images_reversed_laps = read_Img(rigt_image_names_reversed_laps)
+#  
+# flipped_center_images_reversed_laps = flip_image_data(center_images_reversed_laps)
+# flipped_measurements_reversed_laps = flip_measurements(measurements_reversed_laps)
 
-
-center_images = read_Img(center_image_names)
-left_images = read_Img(left_image_names)
-right_images = read_Img(rigt_image_names)
-
-flipped_center_images = flip_image_data(center_images)
-flipped_measurements = flip_measurements(measurements)
-
-File_name_reversed_laps = './2_Laps_reverse/driving_log.csv'
+File_name_data = './data/driving_log.csv'
  
-center_image_names_reversed_laps =  Read_Csv(File_name_reversed_laps, 0, ',')
-center_image_names_reversed_laps = correct_path(center_image_names_reversed_laps)
-left_image_names_reversed_laps = Read_Csv(File_name_reversed_laps, 1, ',')
-left_image_names_reversed_laps = correct_path(left_image_names_reversed_laps)
-rigt_image_names_reversed_laps = Read_Csv(File_name_reversed_laps, 2, ',')
-rigt_image_names_reversed_laps = correct_path(rigt_image_names_reversed_laps)
-measurements_reversed_laps = Read_Csv(File_name_reversed_laps, 3, ',', dataType = 'float')
+center_image_names_data =  Read_Csv(File_name_data, 0, ',')
+center_image_names_data = correct_path(center_image_names_data, r"IMG", "./data/IMG")
+left_image_names_data = Read_Csv(File_name_data, 1, ',')
+print(left_image_names_data[1])
+left_image_names_data = correct_path(left_image_names_data, r"IMG", "./data/IMG")
+print(left_image_names_data[1])
+rigt_image_names_data = Read_Csv(File_name_data, 2, ',')
+rigt_image_names_data = correct_path(rigt_image_names_data, r"IMG", "./data/IMG")
+measurements_data = Read_Csv(File_name_data, 3, ',', dataType = 'float')
+print(type(measurements_data[0]))
+print((measurements_data[0]))
  
+center_images_data = read_Img(center_image_names_data)
+left_images_data = read_Img(left_image_names_data)
+right_images_data = read_Img(rigt_image_names_data)
  
-center_images_reversed_laps = read_Img(center_image_names_reversed_laps)
-left_images_reversed_laps = read_Img(left_image_names_reversed_laps)
-right_images_reversed_laps = read_Img(rigt_image_names_reversed_laps)
- 
-flipped_center_images_reversed_laps = flip_image_data(center_images_reversed_laps)
-flipped_measurements_reversed_laps = flip_measurements(measurements_reversed_laps)
+flipped_center_images_data = flip_image_data(center_images_data)
+# plt.imshow(flipped_center_images_data[0])
+# plt.show()
+flipped_measurements_data = flip_measurements(measurements_data)
 
+X_train = np.array(center_images_data)
+y_train = np.array(measurements_data)
 
-
-
-
-# X_train = np.array(center_images + flipped_center_images + center_images_reversed_laps + flipped_center_images_reversed_laps)
-# y_train = np.array(measurements + flipped_measurements + measurements_reversed_laps + flipped_measurements_reversed_laps)
-
-X_train = np.array(center_images+flipped_center_images)
-y_train = np.array(measurements+flipped_measurements)
+# X_train = np.array(center_images+flipped_center_images)
+# y_train = np.array(measurements+flipped_measurements)
 print(X_train.shape)
 print(y_train.shape)
 
@@ -143,16 +167,15 @@ model = Sequential()
 model.add(Lambda(lambda x: (x/255.0) - 0.5, input_shape=(160,320,3)))
 model.add(Convolution2D(6,5,5,activation='relu'))
 model.add(MaxPooling2D())
-model.add(Convolution2D(6,5,5,activation='relu'))
+model.add(Convolution2D(16,5,5,activation='relu'))
 model.add(MaxPooling2D())
 model.add(Flatten())
 model.add(Dense(120))
 model.add(Dense(84))
 model.add(Dense(1))
 
-
 model.compile(loss = 'mse', optimizer='adam')
-model.fit(X_train, y_train, validation_split=0.2,shuffle=True,nb_epoch=10)
+model.fit(X_train, y_train, validation_split=0.2,shuffle=True,nb_epoch=5)
 
 model.save('model.h5')
 
