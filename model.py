@@ -100,42 +100,31 @@ def flip_measurements(measurments):
         flipped_measurements.append(measurement * -1.0)
     return flipped_measurements
 
+def get_data(File_name, to_be_replaced, to_replace):
+    center_image_names =  Read_Csv(File_name, 0, ',')
+    center_image_names = correct_path(center_image_names, to_be_replaced, to_replace)
+    left_image_names = Read_Csv(File_name, 1, ',')
+    left_image_names = correct_path(left_image_names, to_be_replaced, to_replace)
+    rigt_image_names = Read_Csv(File_name, 2, ',')
+    rigt_image_names = correct_path(rigt_image_names, to_be_replaced, to_replace)
 
+    center_images = read_Img(center_image_names)
+    left_images = read_Img(left_image_names)
+    right_images = read_Img(rigt_image_names)
+
+    measurements = Read_Csv(File_name, 3, ',', dataType = 'float')
+    left_measurements = correct_measurement(measurements, +0.2)
+    right_measurements = correct_measurement(measurements, -0.2)
+    
+    return center_images, left_images, right_images, measurements, left_measurements, right_measurements
+    
 File_name = './output/driving_log.csv'
- 
-center_image_names =  Read_Csv(File_name, 0, ',')
-center_image_names = correct_path(center_image_names, r"C:\Users", "C:\\Users")
-left_image_names = Read_Csv(File_name, 1, ',')
-left_image_names = correct_path(left_image_names, r"C:\Users", "C:\\Users")
-rigt_image_names = Read_Csv(File_name, 2, ',')
-rigt_image_names = correct_path(rigt_image_names, r"C:\Users", "C:\\Users")
-measurements = Read_Csv(File_name, 3, ',', dataType = 'float')
-left_measurements = correct_measurement(measurements, +0.2)
-right_measurements = correct_measurement(measurements, -0.2)
- 
-center_images = read_Img(center_image_names)
-left_images = read_Img(left_image_names)
-right_images = read_Img(rigt_image_names)
-#  
+center_images, left_images, right_images, measurements, left_measurements, right_measurements = get_data(File_name, r"C:\Users", "C:\\Users")
 flipped_center_images = flip_image_data(center_images)
 flipped_measurements = flip_measurements(measurements)
 
 File_name_reversed_laps = './2_Laps_reverse/driving_log.csv'
-   
-center_image_names_reversed_laps =  Read_Csv(File_name_reversed_laps, 0, ',')
-center_image_names_reversed_laps = correct_path(center_image_names_reversed_laps,r"C:\Users", "C:\\Users")
-left_image_names_reversed_laps = Read_Csv(File_name_reversed_laps, 1, ',')
-left_image_names_reversed_laps = correct_path(left_image_names_reversed_laps,r"C:\Users", "C:\\Users")
-rigt_image_names_reversed_laps = Read_Csv(File_name_reversed_laps, 2, ',')
-rigt_image_names_reversed_laps = correct_path(rigt_image_names_reversed_laps, r"C:\Users", "C:\\Users")
-measurements_reversed_laps = Read_Csv(File_name_reversed_laps, 3, ',', dataType = 'float')
-left_measurements_reversed_laps = correct_measurement(measurements_reversed_laps, +0.2)
-right_measurements_reversed_laps = correct_measurement(measurements_reversed_laps, -0.2)
-   
-center_images_reversed_laps = read_Img(center_image_names_reversed_laps)
-left_images_reversed_laps = read_Img(left_image_names_reversed_laps)
-right_images_reversed_laps = read_Img(rigt_image_names_reversed_laps)
-   
+center_images_reversed_laps, left_images_reversed_laps, right_images_reversed_laps, measurements_reversed_laps, left_measurements_reversed_laps, right_measurements_reversed_laps = get_data(File_name_reversed_laps, r"C:\Users", "C:\\Users")
 flipped_center_images_reversed_laps = flip_image_data(center_images_reversed_laps)
 flipped_measurements_reversed_laps = flip_measurements(measurements_reversed_laps)
 
@@ -171,34 +160,37 @@ print(y_train.shape)
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Convolution2D, MaxPooling2D, Cropping2D
 
-model = Sequential()
-model.add(Lambda(lambda x: (x/255.0) - 0.5, input_shape=(90,320,3)))
-# model.add(Cropping2D(cropping=((50,20), (0,0))))
+def model_1():
+    
+    model = Sequential()
+    model.add(Lambda(lambda x: (x/255.0) - 0.5, input_shape=(90,320,3)))
+    # model.add(Cropping2D(cropping=((50,20), (0,0))))
 
 
-# model.add(Convolution2D(6,5,5,activation='relu'))
-# model.add(MaxPooling2D())
-# model.add(Convolution2D(16,5,5,activation='relu'))
-# model.add(MaxPooling2D())
-# model.add(Flatten())
-# model.add(Dense(120))
-# model.add(Dense(84))
-# model.add(Dense(1))
+    # model.add(Convolution2D(6,5,5,activation='relu'))
+    # model.add(MaxPooling2D())
+    # model.add(Convolution2D(16,5,5,activation='relu'))
+    # model.add(MaxPooling2D())
+    # model.add(Flatten())
+    # model.add(Dense(120))
+    # model.add(Dense(84))
+    # model.add(Dense(1))
 
 
-model.add(Convolution2D(24,5,5,subsample=(2,2),activation='relu'))
-model.add(Convolution2D(36,5,5,subsample=(2,2),activation='relu'))
-model.add(Convolution2D(48,5,5,subsample=(2,2),activation='relu'))
-model.add(Convolution2D(64,3,3,activation='relu'))
-model.add(Convolution2D(64,3,3,activation='relu'))
-model.add(Flatten())
-model.add(Dense(100))
-model.add(Dense(50))
-model.add(Dense(10))
-model.add(Dense(1))
+    model.add(Convolution2D(24,5,5,subsample=(2,2),activation='relu'))
+    model.add(Convolution2D(36,5,5,subsample=(2,2),activation='relu'))
+    model.add(Convolution2D(48,5,5,subsample=(2,2),activation='relu'))
+    model.add(Convolution2D(64,3,3,activation='relu'))
+    model.add(Convolution2D(64,3,3,activation='relu'))
+    model.add(Flatten())
+    model.add(Dense(100))
+    model.add(Dense(50))
+    model.add(Dense(10))
+    model.add(Dense(1))
+    return model
 
+model = model_1()
 model.compile(loss = 'mse', optimizer='adam')
 model.fit(X_train, y_train, validation_split=0.2,shuffle=True,nb_epoch=5)
-
 model.save('model.h5')
 
