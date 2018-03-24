@@ -15,8 +15,8 @@ The goals / steps of this project are the following:
 
 
 [//]: # (Image References)
-[image1]: ./output image/data image.png
-[image2]: .//output image/cropped_img.png 
+[image1]: ./output image/data image.png "training images"
+[image2]: ./output image/cropped_img.png  "cropped images"
 
 
 ## Rubric Points
@@ -36,6 +36,7 @@ My project includes the following files:
 ## Data collection
 
 First, I drive the four rounds around track 1 to collect data images. In each frame, the simulator generates 3 images from 3 different camera, which are mounted in then center, on the left and on the right of the car 
+
 ![alt text][image1]
 
 After finish the first drive on track 1 I recognised, that the track has more left curves than right curves, that might make the data set unbalanced, then I decided to drive 2 rounds more on the reverse direction to collect more data
