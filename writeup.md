@@ -52,7 +52,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 ## Data collection
 
-First, I drive the some rounds around track 1 to collect data images. In each frame, the simulator generates 3 images from 3 different camera, which are mounted in then center, on the left and on the right of the car 
+First, I drive the four rounds around track 1 to collect data images. In each frame, the simulator generates 3 images from 3 different camera, which are mounted in then center, on the left and on the right of the car 
 
 ![alt text][image1]
 
@@ -63,7 +63,6 @@ In the next step, I crop the collected images to reduce data size. The images co
 ![alt text][image2]
 
 ## First achitecture (an appropriate model architecture)
-#### 1. An appropriate model architecture
 
 To get started I decided to use the simple model, provided in lectures of Udacity. The model includes two convolution layers and three full-connected layers.
 
@@ -93,11 +92,11 @@ Trainable params: 2,822,201
 Non-trainable params: 0
 </code></pre>
 
-
 After the first train, the car drives very unconfident and often get out of the road, therefore I have tried to tune the number of epochs. After some tries, the car still got stuck, then I tried to augment the training data to build a bigger data set by flipping the images. With the augmented data set I trained the model some more times, but the result is still not as expected. I realised, may be the simple model is not powerful enough, so I went further to apply the model, which is introduced by NVIDIA.
 
-### Model Architecture and Training Strategy
+### Final Architecture and Training Strategy
 
+I choose the model below as my final model. The model has five convolution layers and four fully-connected layers. 
 
 <pre><code>
 _________________________________________________________________
@@ -131,54 +130,28 @@ Non-trainable params: 0
 </code></pre>
 
 
-#### 1. Solution Design Approach
+#### Training 
 
-The overall strategy for deriving a model architecture was to ...
+To train the model I used Adam optimizer with its default learning rate. 
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
-
-To combat the overfitting, I modified the model so that ...
-
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
-
-#### 2. Final Model Architecture
-
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
-
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
+In the input layer the input image is normalized. The input image size is 90x320x3. By using Adam optimizer, the training data set is splited in training set (about 80%) and validation set (about 20%)
+I tried to train the model with different number of epochs. My experiments shows the model was well trained with 5 epochs. With a larger number of epoch the car does not keep on the road any more. 
 
 
+At the end of training process, I got a pretty good test accuracy and validation accuracy
 
-#### 3. Creation of the Training Set & Training Process
+<pre><code>
+19808/20066 [============================>.] - ETA: 3s - loss: 0.0163
+19840/20066 [============================>.] - ETA: 2s - loss: 0.0163
+19872/20066 [============================>.] - ETA: 2s - loss: 0.0163
+19904/20066 [============================>.] - ETA: 1s - loss: 0.0163
+19936/20066 [============================>.] - ETA: 1s - loss: 0.0163
+19968/20066 [============================>.] - ETA: 1s - loss: 0.0163
+20000/20066 [============================>.] - ETA: 0s - loss: 0.0163
+20032/20066 [============================>.] - ETA: 0s - loss: 0.0163
+20064/20066 [============================>.] - ETA: 0s - loss: 0.0163
+20066/20066 [==============================] - 257s 13ms/step - loss: 0.0163 - val_loss: 0.0375
+</code></pre>
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+At the end of the process, I run the trained model in the simulator and finally the vehicle is able to drive autonomously around the track without leaving the road.
 
-![alt text][image2]
-
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
-
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
-
-Then I repeated this process on track two in order to get more data points.
-
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
-
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
-
-
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
