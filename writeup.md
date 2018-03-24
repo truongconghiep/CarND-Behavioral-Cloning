@@ -16,13 +16,9 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[image1]: ./output image/data image.png
+[image2]: .//output image/cropped_img.png 
+
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -38,22 +34,9 @@ My project includes the following files:
 * model.h5 containing a trained convolution neural network 
 * writeup.md for the project report
 
-#### 2. Submission includes functional code
-Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
-```sh
-python drive.py model.h5
-```
-
-#### 3. Submission code is usable and readable
-
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
-
-
-
 ## Data collection
 
 First, I drive the four rounds around track 1 to collect data images. In each frame, the simulator generates 3 images from 3 different camera, which are mounted in then center, on the left and on the right of the car 
-
 ![alt text][image1]
 
 After finish the first drive on track 1 I recognised, that the track has more left curves than right curves, that might make the data set unbalanced, then I decided to drive 2 rounds more on the reverse direction to collect more data
@@ -134,7 +117,7 @@ Non-trainable params: 0
 
 To train the model I used Adam optimizer with its default learning rate. 
 
-In the input layer the input image is normalized. The input image size is 90x320x3. By using Adam optimizer, the training data set is splited in training set (about 80%) and validation set (about 20%)
+In the input layer the input image is normalized. The input image size is 90x320x3. By using Adam optimizer, the training data set is splited in training set (about 80%) and validation set (about 20%).
 I tried to train the model with different number of epochs. My experiments shows the model was well trained with 5 epochs. With a larger number of epoch the car does not keep on the road any more. 
 
 
@@ -154,4 +137,7 @@ At the end of training process, I got a pretty good test accuracy and validation
 </code></pre>
 
 At the end of the process, I run the trained model in the simulator and finally the vehicle is able to drive autonomously around the track without leaving the road.
+
+## Result and discussion
+
 
