@@ -93,19 +93,8 @@ Trainable params: 2,822,201
 Non-trainable params: 0
 </code></pre>
 
-#### 2. Attempts to reduce overfitting in the model
 
-After the first train, the car drives very unconfident and often get out of the road, therefore I have tried to tune the number
-
-#### 3. Model parameter tuning
-
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
-
-#### 4. Appropriate training data
-
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
-
-For details about how I created the training data, see the next section. 
+After the first train, the car drives very unconfident and often get out of the road, therefore I have tried to tune the number of epochs. After some tries, the car still got stuck, then I tried to augment the training data to build a bigger data set by flipping the images. With the augmented data set I trained the model some more times, but the result is still not as expected. I realised, may be the simple model is not powerful enough, so I went further to apply the model, which is introduced by NVIDIA.
 
 ### Model Architecture and Training Strategy
 
