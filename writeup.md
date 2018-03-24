@@ -2,7 +2,7 @@
 
 #### Hiep Truong Cong
 
-In this project of Udacity Self-Driving Car Nanodegree I use a deep CNN to train a model to drive a car in a simulator provided by Udacity. First the car was driven by a human a round a track to collect data images und driving information for the training. Then a CNN model was trained with the collected data to drive itself around the track.
+In this project of Udacity Self-Driving Car Nanodegree I use a deep CNN to train a model to drive a car in a simulator provided by Udacity. First, the car was driven by a human around a track to collect data images and driving information for the training. Then the CNN model was trained with the collected data to drive itself around the track.
 
 ---
 
@@ -37,13 +37,13 @@ My project includes the following files:
 
 ## Data collection
 
-First, I drive the four rounds around track 1 to collect data images. In each frame, the simulator generates 3 images from 3 different camera, which are mounted in then center, on the left and on the right of the car 
+First, I drive four rounds around track 1 to collect data images. In each frame, the simulator generates 3 images from 3 different cameras, which are mounted in the center, on the left and on the right of the car 
 
 ![alt text][image1]
 
-After finish the first drive on track 1 I recognised, that the track has more left curves than right curves, that might make the data set unbalanced, then I decided to drive 2 rounds more on the reverse direction to collect more data
+After finishing the first drive on track 1 I recognised, that the track has more left curves than right curves, that might make the data set unbalanced, then I decided to drive 2 rounds more on the reverse direction to collect more data
 
-In the next step, I crop the collected images to reduce data size. The images contain a lot information, for example: road, tree, sky. Some information is not necessary for training, therefore we can cut them out of images. I decide to remove 50 pixel on top of images, wherec contains sky and 20 pixels at the bottom, where contains the hood of the car. The rest of images contain useful information, like road and landlines.
+In the next step, I crop the collected images to reduce data size. The images contain a lot of information, for example: road, tree, sky. Some information is not necessary for the training, therefore we can cut them out of the images. I decide to remove 50 pixel on top of images, where contains sky and 20 pixels at the bottom, where contains the hood of the car. The rest of images contain useful information, like road and landlines.
 
 ![alt text][image2]
 
@@ -140,7 +140,7 @@ At the end of training process, I got a pretty good test accuracy and validation
 20066/20066 [==============================] - 257s 13ms/step - loss: 0.0163 - val_loss: 0.0375
 </code></pre>
 
-At the end of the process, I run the trained model in the simulator and finally the vehicle is able to drive autonomously around the track without leaving the road.
+At the end of the process, I run the trained model in the simulator and finally the vehicle was able to drive autonomously around the track without leaving the road.
 
 ## Result and discussion
 
