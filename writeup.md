@@ -15,8 +15,8 @@ The goals / steps of this project are the following:
 
 
 [//]: # (Image References)
-[image1]: ./output image/data image.png "training images"
-[image2]: ./output image/cropped_img.png  "cropped images"
+[image1]: ./output_image/data image.png "training images"
+[image2]: ./output_image/cropped_img.png "cropped images"
 
 
 ## Rubric Points
