@@ -1,12 +1,10 @@
 # **Behavioral Cloning** 
 
-## Writeup Template
+#### Hiep Truong Cong
 
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+In this project of Udacity Self-Driving Car Nanodegree I use a deep CNN to train a model to drive a car in a simulator provided by Udacity. First the car was driven by a human a round a track to collect data images und driving information for the training. Then a CNN model was trained with the collected data to drive itself around the track.
 
 ---
-
-**Behavioral Cloning Project**
 
 The goals / steps of this project are the following:
 * Use the simulator to collect data of good driving behavior
@@ -30,7 +28,7 @@ The goals / steps of this project are the following:
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
 
 ---
-### Files Submitted & Code Quality
+## Files Submitted & Code Quality
 
 #### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
@@ -38,7 +36,7 @@ My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
-* writeup_report.md or writeup_report.pdf summarizing the results
+* writeup.md for the project report
 
 #### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -50,19 +48,54 @@ python drive.py model.h5
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-### Model Architecture and Training Strategy
 
-#### 1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+## Data collection
 
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+First, I drive the some rounds around track 1 to collect data images. In each frame, the simulator generates 3 images from 3 different camera, which are mounted in then center, on the left and on the right of the car 
+
+![alt text][image1]
+
+After finish the first drive on track 1 I recognised, that the track has more left curves than right curves, that might make the data set unbalanced, then I decided to drive 2 rounds more on the reverse direction to collect more data
+
+In the next step, I crop the collected images to reduce data size. The images contain a lot information, for example: road, tree, sky. Some information is not necessary for training, therefore we can cut them out of images. I decide to remove 50 pixel on top of images, wherec contains sky and 20 pixels at the bottom, where contains the hood of the car. The rest of images contain useful information, like road and landlines.
+
+![alt text][image2]
+
+## First achitecture (an appropriate model architecture)
+#### 1. An appropriate model architecture
+
+To get started I decided to use the simple model, provided in lectures of Udacity. The model includes two convolution layers and three full-connected layers.
+
+<pre><code>
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lambda_1 (Lambda)            (None, 90, 320, 3)        0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 86, 316, 6)        456       
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 43, 158, 6)        0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 39, 154, 16)       2416      
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 19, 77, 16)        0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 23408)             0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 120)               2809080   
+_________________________________________________________________
+dense_2 (Dense)              (None, 84)                10164     
+_________________________________________________________________
+dense_3 (Dense)              (None, 1)                 85        
+=================================================================
+Total params: 2,822,201
+Trainable params: 2,822,201
+Non-trainable params: 0
+</code></pre>
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+After the first train, the car drives very unconfident and often get out of the road, therefore I have tried to tune the number
 
 #### 3. Model parameter tuning
 
@@ -75,6 +108,39 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 For details about how I created the training data, see the next section. 
 
 ### Model Architecture and Training Strategy
+
+
+<pre><code>
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lambda_2 (Lambda)            (None, 90, 320, 3)        0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 43, 158, 24)       1824      
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 20, 77, 36)        21636     
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 8, 37, 48)         43248     
+_________________________________________________________________
+conv2d_6 (Conv2D)            (None, 6, 35, 64)         27712     
+_________________________________________________________________
+conv2d_7 (Conv2D)            (None, 4, 33, 64)         36928     
+_________________________________________________________________
+flatten_2 (Flatten)          (None, 8448)              0         
+_________________________________________________________________
+dense_4 (Dense)              (None, 100)               844900    
+_________________________________________________________________
+dense_5 (Dense)              (None, 50)                5050      
+_________________________________________________________________
+dense_6 (Dense)              (None, 10)                510       
+_________________________________________________________________
+dense_7 (Dense)              (None, 1)                 11        
+=================================================================
+Total params: 981,819
+Trainable params: 981,819
+Non-trainable params: 0
+</code></pre>
+
 
 #### 1. Solution Design Approach
 
@@ -98,7 +164,7 @@ The final model architecture (model.py lines 18-24) consisted of a convolution n
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
-![alt text][image1]
+
 
 #### 3. Creation of the Training Set & Training Process
 
