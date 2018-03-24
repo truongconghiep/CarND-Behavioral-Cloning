@@ -146,5 +146,10 @@ At the end of the process, I run the trained model in the simulator and finally 
 
 [Here](https://github.com/truongconghiep/CarND-Behavioral-Cloning/blob/master/video.mp4) is the recorded video of autonomous driving by my model
 
-![alt text][video1]
+### Shortcommings
+The car was still not able to drive smoothly with maximum speed around the track. For this I have also some suggestion to improvment in the furture
+- Generate more training data 
+- Apply dropout to deal with overfitting
+- Use fit_generator of keras to generate traing data during training process
+
 
