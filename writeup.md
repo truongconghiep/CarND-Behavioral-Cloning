@@ -144,4 +144,7 @@ At the end of the process, I run the trained model in the simulator and finally 
 
 ## Result and discussion
 
+[Here](https://github.com/truongconghiep/CarND-Behavioral-Cloning/blob/master/video.mp4) is the recorded video of autonomous driving by my model
+
+![alt text][video1]
 
