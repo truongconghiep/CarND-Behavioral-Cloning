@@ -6,6 +6,8 @@ In this project of Udacity Self-Driving Car Nanodegree I use a deep CNN to train
 
 ---
 
+**Behavioral Cloning Project**
+
 The goals / steps of this project are the following:
 * Use the simulator to collect data of good driving behavior
 * Build, a convolution neural network in Keras that predicts steering angles from images
@@ -14,6 +16,7 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 [//]: # (Image References)
+
 [image1]: ./output_image/data image.png
 [image2]: ./output_image/cropped_img.png
 [video1]: ./pvideo.mp4
