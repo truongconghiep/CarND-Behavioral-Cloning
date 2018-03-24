@@ -3,6 +3,7 @@ import base64
 from datetime import datetime
 import os
 import shutil
+import cv2
 
 import numpy as np
 import socketio
@@ -64,10 +65,6 @@ def telemetry(sid, data):
         image_array = image_array[50:140,:]
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
-#         throttle = controller.update(float(speed))
-
-
-        
         lo_speed = 10
         mid_speed = 20
         hi_speed = 30
