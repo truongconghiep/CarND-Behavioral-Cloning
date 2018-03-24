@@ -13,12 +13,10 @@ The goals / steps of this project are the following:
 * Test that the model successfully drives around track one without leaving the road
 * Summarize the results with a written report
 
-
 [//]: # (Image References)
 [image1]: ./output_image/data image.png
 [image2]: ./output_image/cropped_img.png
 [video1]: ./pvideo.mp4
-
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -32,7 +30,7 @@ My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
-* writeup.md for the project report
+* writeup.md for the project report.
 
 ## Data collection
 
