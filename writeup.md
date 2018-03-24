@@ -15,7 +15,6 @@ The goals / steps of this project are the following:
 
 
 [//]: # (Image References)
-
 [image1]: ./output image/data image.png
 [image2]: .//output image/cropped_img.png 
 
@@ -44,6 +43,8 @@ After finish the first drive on track 1 I recognised, that the track has more le
 In the next step, I crop the collected images to reduce data size. The images contain a lot information, for example: road, tree, sky. Some information is not necessary for training, therefore we can cut them out of images. I decide to remove 50 pixel on top of images, wherec contains sky and 20 pixels at the bottom, where contains the hood of the car. The rest of images contain useful information, like road and landlines.
 
 ![alt text][image2]
+
+Finally I generated 25083 training images
 
 ## First achitecture (an appropriate model architecture)
 
