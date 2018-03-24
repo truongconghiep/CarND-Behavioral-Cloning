@@ -17,9 +17,9 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./output_image/data image.png
+[image1]: ./output_image/data_image.png
 [image2]: ./output_image/cropped_img.png
-[video1]: ./pvideo.mp4
+[video1]: ./video.mp4
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
